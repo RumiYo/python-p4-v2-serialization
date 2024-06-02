@@ -20,7 +20,7 @@ def index():
     body = {'message': 'Welcome to the pet directory!'}
     return make_response(body, 200)
 
-@app.route('/pets/<init:id>')
+@app.route('/pets/<int:id>')
 def pet_by_id(id):
     pet = Pet.query.filter(Pet.id == id).first()
 
@@ -37,8 +37,8 @@ def pet_by_id(id):
 @app.route('/species/<string:species>')
 def pet_by_species(species):
     pets = []
-    for pet in Pet.query.filter_by(species = species).all()
-        pets.append(pet.dict())
+    for pet in Pet.query.filter_by(species = species).all():
+        pets.append(pet.to_dict())
     body = {'count': len(pets),
             'pets': pets
             }
